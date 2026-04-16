@@ -1,35 +1,54 @@
 from calc_art import art
+#global result
 
 
-def menu(x):
-    terminate = False
+def menu(x :str ,y : bool):
+    global result
+    continuation_operation = y
+#    terminate = False
     should_continue = False
     if x=='1' or x=="add":
-        a = input("add first number")
-        b = input("add second number")
+        if continuation_operation == True:
+            a = int(input("add first number: "))
+            b = int(input("add second number: "))
+        else:
+            a = int(result)
+            b = int(input("enter your number: "))
         add(a,b)
-        result = add(a,b)
+        result = str(int(add(a,b)))
         
     elif x=='2' or x=="sub" or x=="subtract":
-        a = input("add first number")
-        b = input("add second number")
+        if continuation_operation == True:
+            a = int(input("add first number: "))
+            b = int(input("add second number: "))
+        else:
+            a = int(result)
+            b = int(input("enter your number: "))
         subtract(a,b)
-        result = subtract(a,b)
+        result = str(int(subtract(a,b)))
 
     elif x=='3' or x=="multiply" or x=="mul":
-        a = input("add first number")
-        b = input("add second number")
+        if continuation_operation == True:
+            a = int(input("add first number: "))
+            b = int(input("add second number: "))
+        else:
+            a = int(result)
+            b = int(input("enter your number: "))
         multiply(a,b)
-        result = multiply(a,b)
+        result = str(int(multiply(a,b)))
 
     elif x=='4' or x=="dov" or x=="divide":
-        a = input("add first number")
-        b = input("add second number")
+        if continuation_operation == True:
+            a = int(input("add first number: "))
+            b = int(input("add second number: "))
+        else:
+            a = int(result)
+            b = int(input("enter your number: "))
         divide(a,b)
-        result = divide(a,b)
+        result = str(int(divide(a,b)))
     
 #    elif x=='5' or x=="end":
-        terminate = True
+#       terminate = True
 
 
 #     else :
@@ -40,13 +59,16 @@ def menu(x):
         i = input("enter 'continue' or 'y' to conintue and 'no' or 'n' to stop : ")
         if i=="continue" or i=='y':
             should_continue = True
+            game(result)
             break
         elif i=="no" or i=='n':
             break
         else:
             print("invalid output")
 
-        
+
+    if should_continue == True:
+        game(result)
 
 
 def add(x: int, y: int):
@@ -65,10 +87,18 @@ def divide(x: int, y: int):
     print(f"{x} / {y} = {x/y}")
     return x/y
 
+
 #def take_input():
 #    inp = input("enter your operation")
 
-def game():
+def game(a):
+
+    global first_operation
+    
+    if a == "null": 
+        first_operation = True
+    else:
+        first_operation = False
     print("WELCOME TO CALCULATOR")
     print(art)
     print("enter 1 or add: add")
@@ -77,15 +107,16 @@ def game():
     print("enter 4 or div or divide: divide")
     print("enter 5: exit calculator")
     while True:
-        inp = int(input("enter your choise: "))
+        inp =input("enter your choise: ")
         if inp == 1 or 2 or 3 or 4 or 5:
             break
         else:
             print("invalid input!")
     if inp!=5:
-        menu(inp)
+        menu(inp , first_operation)
+
     else:
         print("closing calculator thank you")
-
-
-
+    
+initial_stage = "null" 
+game(initial_stage)
